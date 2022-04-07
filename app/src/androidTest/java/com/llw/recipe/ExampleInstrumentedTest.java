@@ -1,4 +1,4 @@
-package com.li.recipe;
+package com.llw.recipe;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.li.recipe", appContext.getPackageName());
+        assertEquals("com.llw.recipe", appContext.getPackageName());
     }
 }
