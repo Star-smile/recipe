@@ -15,4 +15,13 @@ public class UserService {
         return res == 1;
     }
 
+    public boolean userRegisterService(String userID, String userPwd){
+        String  userId=mapper.seeUserId(userID);
+        if(userId != null){
+            return false;
+        }else{
+            int res= mapper.userRegisterMapper(userID, userPwd);
+            return res==1;
+        }
+    }
 }

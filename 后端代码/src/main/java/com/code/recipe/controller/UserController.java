@@ -27,4 +27,14 @@ public class UserController {
         return map;
     }
 
+    @ResponseBody
+    @RequestMapping(value="register", method = RequestMethod.GET,produces = "application/json;charset=utf-8")
+    public Map<String,Boolean> register(@RequestParam("userID") String userID,
+                                        @RequestParam("userPwd") String userPwd){
+        boolean result=service.userRegisterService(userID,userPwd);
+        Map<String,Boolean> map=new HashMap<>();
+        map.put("result",result);
+        return map;
+    }
+
 }

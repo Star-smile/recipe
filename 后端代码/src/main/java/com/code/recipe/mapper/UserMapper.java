@@ -7,4 +7,8 @@ public interface UserMapper {
 
     int userLoginMapper(String userID, String userPwd);
 
+    String seeUserId(String userID);
+
+    int userRegisterMapper(String userID, String userPwd);
+
 }

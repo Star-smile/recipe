@@ -8,4 +8,17 @@
         select count(user_id) from user where user_id=#{userID} and pwd=#{userPwd} limit 1
     </select>
 
+
+    <select id="seeUserId" resultType="string">
+        select user_id from user where user_id=#{userID}
+    </select>
+
+    <insert id="userRegisterMapper" parameterType="string">
+        insert into user(user_id,pwd)
+        values (
+                   #{userID},
+                   #{userPwd}
+               )
+    </insert>
+
 </mapper>
