@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/recipe
+    username: "root"
+    password: "ROOT"
+  jdbc:
+    template:
+      query-timeout: 3
+  thymeleaf:
+    encoding: UTF-8
+    enabled: true
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
