@@ -37,4 +37,15 @@ public class UserController {
         return map;
     }
 
+    @ResponseBody
+    @RequestMapping(value="reset", method = RequestMethod.GET,produces = "application/json;charset=utf-8")
+    public Map<String,Boolean> reset(@RequestParam("userID") String userID,
+                                     @RequestParam("userNewPwd") String userNewPwd){
+        boolean result=service.userResetService(userID,userNewPwd);
+        Map<String,Boolean> map=new HashMap<>();
+        map.put("result",result);
+        return map;
+    }
+
+
 }

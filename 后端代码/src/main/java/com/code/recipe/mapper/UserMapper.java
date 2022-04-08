@@ -11,4 +11,6 @@ public interface UserMapper {
 
     int userRegisterMapper(String userID, String userPwd);
 
+    int userResetMapper(String userID,String userPwd);
+
 }

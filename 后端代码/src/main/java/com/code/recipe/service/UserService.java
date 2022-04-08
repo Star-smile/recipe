@@ -24,4 +24,15 @@ public class UserService {
             return res==1;
         }
     }
+
+    public boolean userResetService(String userID,String userNewPwd){
+        String  userId=mapper.seeUserId(userID);
+        if(userId != null){
+            int res=mapper.userResetMapper(userID,userNewPwd);
+            return res==1;
+        }else{
+            return false;
+        }
+    }
+
 }

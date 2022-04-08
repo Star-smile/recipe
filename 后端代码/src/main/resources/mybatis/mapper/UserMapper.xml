@@ -21,4 +21,8 @@
                )
     </insert>
 
+    <update id="userResetMapper" parameterType="string">
+        update user set pwd=#{userPwd} where user_id=#{userID}
+    </update>
+
 </mapper>
