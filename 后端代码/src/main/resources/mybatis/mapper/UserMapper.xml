@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.code.recipe.mapper.UserMapper">
+
+    <select id="userLoginMapper" resultType="int">
+        select count(user_id) from user where user_id=#{userID} and pwd=#{userPwd} limit 1
+    </select>
+
+
+    <select id="seeUserId" resultType="string">
+        select user_id from user where user_id=#{userID}
+    </select>
+
+    <insert id="userRegisterMapper" parameterType="string">
+        insert into user(user_id,pwd)
+        values (
+                   #{userID},
+                   #{userPwd}
+               )
+    </insert>
+
+    <update id="userResetMapper" parameterType="string">
+        update user set pwd=#{userPwd} where user_id=#{userID}
+    </update>
+
+</mapper>
