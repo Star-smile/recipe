@@ -4,4 +4,40 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.code.recipe.mapper.PostMapper">
 
+    <insert id="insetPostMsg" parameterType="com.code.recipe.bean.PostBean">
+        insert into post(post_id,name,user_id,nav_id,degree,use_time,introduction,tip,cover,c_time)
+        values (
+                   #{post_id},
+                   #{name},
+                   #{user_id},
+                   #{nav_id},
+                   #{degree},
+                   #{use_time},
+                   #{introduction},
+                   #{tip},
+                   #{cover},
+                   #{c_time}
+               )
+    </insert>
+
+    <insert id="insertMaterial" parameterType="com.code.recipe.bean.MaterialBean">
+        insert into material(material_id,post_id,consumption,ingredient)
+        values (
+                   #{material_id},
+                   #{post_id},
+                   #{consumption},
+                   #{ingredient}
+               )
+    </insert>
+
+    <insert id="insertMethod" parameterType="com.code.recipe.bean.MethodBean">
+        insert into methods(method_id,seq,post_id,image,interpret)
+        values (
+                   #{method_id},
+                   #{seq},
+                   #{post_id},
+                   #{image},
+                   #{interpret}
+               )
+    </insert>
 </mapper>
