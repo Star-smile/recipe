@@ -1,6 +1,6 @@
 package com.code.recipe.service;
 
-import com.code.recipe.mapper.UserMapper;
+import com.code.recipe.dao.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -3,7 +3,7 @@ package com.code.recipe.service;
 import com.code.recipe.bean.MaterialBean;
 import com.code.recipe.bean.MethodBean;
 import com.code.recipe.bean.PostBean;
-import com.code.recipe.mapper.PostMapper;
+import com.code.recipe.dao.PostMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

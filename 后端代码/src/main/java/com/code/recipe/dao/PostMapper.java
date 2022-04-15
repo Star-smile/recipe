@@ -1,4 +1,4 @@
-package com.code.recipe.mapper;
+package com.code.recipe.dao;
 
 import com.code.recipe.bean.MaterialBean;
 import com.code.recipe.bean.MethodBean;

@@ -1,4 +1,4 @@
-package com.code.recipe.mapper;
+package com.code.recipe.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 
