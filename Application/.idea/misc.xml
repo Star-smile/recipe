@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/android/recipe/recipe/Application/app/src/main/res/layout/activity_dynamic.xml" value="0.109375" />
+        <entry key="..\:/android/recipe/recipe/Application/app/src/main/res/layout/activity_main.xml" value="0.109375" />
+        <entry key="..\:/android/recipe/recipe/Application/app/src/main/res/layout/activity_primary.xml" value="0.109375" />
         <entry key="..\:/android/recipe/recipe/Application/app/src/main/res/layout/activity_register.xml" value="0.1" />
         <entry key="..\:/android/recipe/recipe/Application/app/src/main/res/layout/activity_reset.xml" value="0.109375" />
       </map>
