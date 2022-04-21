@@ -46,6 +46,4 @@ public class UserController {
         map.put("result",result);
         return map;
     }
-
-
 }
