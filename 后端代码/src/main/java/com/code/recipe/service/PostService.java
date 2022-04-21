@@ -18,7 +18,7 @@ public class PostService {
     @Autowired
     PostMapper mapper;
 
-    public boolean publishService(PostBean post, List<MaterialBean> materials, List<MethodBean> methods){
+    public String publishService(PostBean post, List<MaterialBean> materials, List<MethodBean> methods){
         boolean tmp=false;
         String post_id= UUID.randomUUID().toString();
         Date utilDate = new Date();
@@ -42,10 +42,10 @@ public class PostService {
                 int r=mapper.insertMethod(method);
                 tmp=r==1;
             }
-            return tmp;
         }
-        else{
-            return false;
-        }
+        if(tmp)
+            return post_id;
+        else
+            return null;
     }
 }

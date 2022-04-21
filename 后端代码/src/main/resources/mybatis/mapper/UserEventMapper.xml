@@ -4,12 +4,42 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.code.recipe.dao.UserEventMapper">
 
+    <select id="whetherExistLike_id" resultType="int">
+        select count(like_id) from likes
+    </select>
+
+    <select id="whetherExistNameAndWho" resultType="int">
+        select count(focus_id) from focus where name=#{name} and who=#{who}
+    </select>
+
     <insert id="addFocusMsgMapper" parameterType="string">
         insert into focus(focus_id,name,who)
         values (
                 #{focus_id},
                 #{name},
                 #{who}
+               )
+    </insert>
+
+    <delete id="removeFocusMsgMapper">
+        delete from focus where name=#{name} and who=#{who}
+    </delete>
+
+    <delete id="removeLikeMsgMapper">
+        delete from likes where like_id=#{like_id}
+    </delete>
+
+    <select id="whetherExistLikeMsg" resultType="int">
+        select count(like_id) from likes where post_id=#{post_id} and name=#{name}
+    </select>
+
+    <insert id="addLikeMsgMapper" parameterType="string">
+        insert into likes
+        values (
+                #{like_id},
+                #{post_id},
+                #{name},
+                #{c_time}
                )
     </insert>
 

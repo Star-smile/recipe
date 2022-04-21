@@ -21,13 +21,13 @@ public class PostController {
 
     @ResponseBody
     @RequestMapping(value="publish", method = RequestMethod.PUT,produces = "application/json;charset=utf-8")
-    public Map<String,Boolean> publishController(@RequestBody PublishBean publishBean){
+    public Map<String,String> publishController(@RequestBody PublishBean publishBean){
         System.out.print(publishBean);
         PostBean post=publishBean.getPost();
         List<MethodBean> methods=publishBean.getMethods();
         List<MaterialBean> materials=publishBean.getMaterials();
-        boolean result=postService.publishService(post, materials, methods);
-        Map<String,Boolean> map=new HashMap<>();
+       String result=postService.publishService(post, materials, methods);
+        Map<String,String> map=new HashMap<>();
         map.put("result",result);
         return map;
     }

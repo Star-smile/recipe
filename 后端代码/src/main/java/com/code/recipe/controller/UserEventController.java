@@ -17,12 +17,43 @@ public class UserEventController {
     UserEventService service;
 
     @ResponseBody
-    @RequestMapping(value="focus", method = RequestMethod.GET,produces = "application/json;charset=utf-8")
-    public Map<String,Boolean> login(@RequestParam("name") String name,
+    @RequestMapping(value="addFocus", method = RequestMethod.GET,produces = "application/json;charset=utf-8")
+    public Map<String,Boolean> addFocus(@RequestParam("name") String name,
                                      @RequestParam("who") String who){
         boolean res=service.addFocusMsgService(name, who);
         Map<String,Boolean> map=new HashMap<>();
         map.put("data",res);
         return map;
     }
+
+    @ResponseBody
+    @RequestMapping(value="removeFocus", method = RequestMethod.GET,produces = "application/json;charset=utf-8")
+    public Map<String,Boolean> removeFocus(@RequestParam("name") String name,
+                                     @RequestParam("who") String who){
+        boolean res=service.removeFocusMsgService(name, who);
+        Map<String,Boolean> map=new HashMap<>();
+        map.put("data",res);
+        return map;
+    }
+
+    @ResponseBody
+    @RequestMapping(value="addLike", method = RequestMethod.GET,produces = "application/json;charset=utf-8")
+    public Map<String,String> addLike(@RequestParam("post_id") String post_id,
+                                           @RequestParam("name") String name){
+        String res=service.addLikeMsgService(post_id, name);
+        Map<String,String> map=new HashMap<>();
+        map.put("data",res);
+        return map;
+    }
+
+    @ResponseBody
+    @RequestMapping(value="removeLike", method = RequestMethod.GET,produces = "application/json;charset=utf-8")
+    public Map<String,Boolean> removeLike(@RequestParam("like_id") String like_id){
+        boolean res=service.removeLikeMsgService(like_id);
+        Map<String,Boolean> map=new HashMap<>();
+        map.put("data",res);
+        return map;
+    }
+
+
 }
