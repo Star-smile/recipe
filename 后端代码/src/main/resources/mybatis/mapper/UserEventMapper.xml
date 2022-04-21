@@ -4,4 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.code.recipe.dao.UserEventMapper">
 
+    <insert id="addFocusMsgMapper" parameterType="string">
+        insert into focus(focus_id,name,who)
+        values (
+                #{focus_id},
+                #{name},
+                #{who}
+               )
+    </insert>
+
 </mapper>

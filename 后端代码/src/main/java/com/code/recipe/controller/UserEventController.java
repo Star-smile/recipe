@@ -20,6 +20,9 @@ public class UserEventController {
     @RequestMapping(value="focus", method = RequestMethod.GET,produces = "application/json;charset=utf-8")
     public Map<String,Boolean> login(@RequestParam("name") String name,
                                      @RequestParam("who") String who){
-
+        boolean res=service.addFocusMsgService(name, who);
+        Map<String,Boolean> map=new HashMap<>();
+        map.put("data",res);
+        return map;
     }
 }
