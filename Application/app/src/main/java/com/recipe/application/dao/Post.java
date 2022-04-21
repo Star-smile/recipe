@@ -101,4 +101,19 @@ public class Post implements Serializable {
     public void setPeople(String people) {
         this.people = people;
     }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "name='" + name + '\'' +
+                ", cover='" + cover + '\'' +
+                ", introduction='" + introduction + '\'' +
+                ", tip='" + tip + '\'' +
+                ", user_time='" + user_time + '\'' +
+                ", collection='" + collection + '\'' +
+                ", degree='" + degree + '\'' +
+                ", people='" + people + '\'' +
+                ", type=" + type +
+                '}';
+    }
 }

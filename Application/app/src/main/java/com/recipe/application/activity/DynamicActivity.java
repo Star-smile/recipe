@@ -32,10 +32,10 @@ import com.recipe.application.R;
 import com.recipe.application.dao.Brief_dish;
 import com.android.recipe.dao.Materials;
 import com.android.recipe.dao.Method;
-import com.android.recipe.dao.Post;
-import com.android.recipe.dao.User;
-import com.android.recipe.utils.BitmapUtils;
-import com.android.recipe.utils.CameraUtils;
+import com.recipe.application.dao.Post;
+import com.recipe.application.dao.User;
+import com.recipe.application.utils.BitmapUtils;
+import com.recipe.application.utils.CameraUtils;
 import com.bumptech.glide.Glide;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
