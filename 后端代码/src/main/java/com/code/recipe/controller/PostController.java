@@ -20,7 +20,7 @@ public class PostController {
     PostService postService;
 
     @ResponseBody
-    @RequestMapping(value="publish", method = RequestMethod.PUT,produces = "application/json;charset=utf-8")
+    @RequestMapping(value="publish", method = RequestMethod.POST,produces = "application/json;charset=utf-8")
     public Map<String,String> publishController(@RequestBody PublishBean publishBean){
         System.out.print(publishBean);
         PostBean post=publishBean.getPost();
