@@ -4,4 +4,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.code.recipe.dao.ShowMapper">
 
+    <select id="getTypeMsgMapper" resultType="com.code.recipe.bean.TypeBean">
+        select * from types
+    </select>
+
+    <select id="getNavMsgMapper" resultType="com.code.recipe.bean.NavBean">
+        select * from nav
+    </select>
+
 </mapper>
