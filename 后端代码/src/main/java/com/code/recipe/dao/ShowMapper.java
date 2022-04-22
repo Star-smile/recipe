@@ -1,7 +1,6 @@
 package com.code.recipe.dao;
 
-import com.code.recipe.bean.NavBean;
-import com.code.recipe.bean.TypeBean;
+import com.code.recipe.bean.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -12,4 +11,11 @@ public interface ShowMapper {
     List<TypeBean> getTypeMsgMapper();
 
     List<NavBean> getNavMsgMapper();
+
+    PostBean getPostMsgMapper(String post_id);
+
+    List<LikeBean> getLikeMsgMapper(String name);
+
+    List<FocusBean> getFocusMsgMapper(String who);
+
 }

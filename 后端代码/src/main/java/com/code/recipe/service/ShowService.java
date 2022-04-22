@@ -1,7 +1,6 @@
 package com.code.recipe.service;
 
-import com.code.recipe.bean.NavBean;
-import com.code.recipe.bean.TypeBean;
+import com.code.recipe.bean.*;
 import com.code.recipe.dao.ShowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,5 +19,17 @@ public class ShowService {
 
     public List<NavBean> getNavMsgService(){
         return mapper.getNavMsgMapper();
+    }
+
+    public PostBean getPostMsgService(String post_id){
+        return mapper.getPostMsgMapper(post_id);
+    }
+
+    public List<LikeBean> getLikeMsgService(String name){
+        return mapper.getLikeMsgMapper(name);
+    }
+
+    public List<FocusBean> getFocusMsgService(String who){
+        return mapper.getFocusMsgMapper(who);
     }
 }

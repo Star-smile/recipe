@@ -12,4 +12,16 @@
         select * from nav
     </select>
 
+    <select id="getPostMsgMapper" resultType="com.code.recipe.bean.PostBean">
+        select * from post where post_id=#{post_id}
+    </select>
+
+    <select id="getLikeMsgMapper" resultType="com.code.recipe.bean.LikeBean">
+        select * from likes
+    </select>
+
+    <select id="getFocusMsgMapper" resultType="com.code.recipe.bean.FocusBean">
+        select * from focus
+    </select>
+
 </mapper>
