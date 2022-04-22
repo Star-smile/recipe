@@ -67,4 +67,18 @@ public class UserEventService {
         }
 
     }
+
+    public String addCommentMsgService(String post_id,String name,String content,String image){
+        String comment_id=UUID.randomUUID().toString();
+        Date utilDate = new Date();
+        SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String c_time=dateFormat.format(utilDate );
+        int rs= mapper.addCommentMsgMapper(comment_id,post_id,name,content,image,c_time);
+        if(rs==1){
+            return comment_id;
+        }else{
+            return null;
+        }
+    }
+
 }

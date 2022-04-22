@@ -43,4 +43,16 @@
                )
     </insert>
 
+    <insert id="addCommentMsgMapper" parameterType="string">
+        insert into comment
+        values (
+                #{comment_id},
+                #{post_id},
+                #{name},
+                #{content},
+                #{image},
+                #{c_time}
+               )
+    </insert>
+
 </mapper>

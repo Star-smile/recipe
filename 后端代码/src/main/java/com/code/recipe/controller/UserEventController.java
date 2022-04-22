@@ -55,5 +55,16 @@ public class UserEventController {
         return map;
     }
 
+    @ResponseBody
+    @RequestMapping(value="addComment", method = RequestMethod.GET,produces = "application/json;charset=utf-8")
+    public Map<String,String> addComment(@RequestParam("post_id") String post_id,
+                                         @RequestParam("name") String name,
+                                         @RequestParam("content") String content,
+                                         @RequestParam("image") String image){
+        String res=service.addCommentMsgService(post_id, name, content, image);
+        Map<String,String> map=new HashMap<>();
+        map.put("data",res);
+        return map;
+    }
 
 }
