@@ -5,7 +5,7 @@
 <mapper namespace="com.code.recipe.dao.UserEventMapper">
 
     <select id="whetherExistLike_id" resultType="int">
-        select count(like_id) from likes
+        select count(like_id) from likes where like_id=#{like_id}
     </select>
 
     <select id="whetherExistNameAndWho" resultType="int">
@@ -54,5 +54,13 @@
                 #{c_time}
                )
     </insert>
+
+    <select id="whetherExistComment_id" resultType="int">
+        select count(comment_id) from comment where comment_id=#{comment_id}
+    </select>
+
+    <delete id="removeCommentMsgMapper">
+        delete from comment where comment_id=#{comment_id}
+    </delete>
 
 </mapper>

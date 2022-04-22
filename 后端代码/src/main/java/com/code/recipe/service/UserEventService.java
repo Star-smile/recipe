@@ -81,4 +81,16 @@ public class UserEventService {
         }
     }
 
+    public boolean removeCommentMsgService(String comment_id){
+        int result= mapper.whetherExistComment_id(comment_id);
+        if(result==1){
+            int r=mapper.removeCommentMsgMapper(comment_id);
+            return r==1;
+        }
+        else{
+            return false;
+        }
+
+    }
+
 }

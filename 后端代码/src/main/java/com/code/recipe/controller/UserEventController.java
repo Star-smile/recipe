@@ -67,4 +67,13 @@ public class UserEventController {
         return map;
     }
 
+    @ResponseBody
+    @RequestMapping(value="removeComment", method = RequestMethod.GET,produces = "application/json;charset=utf-8")
+    public Map<String,Boolean> removeComment(@RequestParam("comment_id") String comment_id){
+        boolean res=service.removeCommentMsgService(comment_id);
+        Map<String,Boolean> map=new HashMap<>();
+        map.put("data",res);
+        return map;
+    }
+
 }

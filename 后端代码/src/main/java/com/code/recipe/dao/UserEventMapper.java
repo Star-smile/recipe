@@ -20,4 +20,8 @@ public interface UserEventMapper {
     int removeLikeMsgMapper(String like_id);
 
     int addCommentMsgMapper(String comment_id,String post_id,String name,String content,String image,String c_time);
+
+    int whetherExistComment_id(String comment_id);
+
+    int removeCommentMsgMapper(String comment_id);
 }
