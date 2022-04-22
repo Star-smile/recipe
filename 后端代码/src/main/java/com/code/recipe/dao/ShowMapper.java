@@ -18,4 +18,7 @@ public interface ShowMapper {
 
     List<FocusBean> getFocusMsgMapper(String who);
 
+    int whetherExistLikeMessageMapper(String post_id,String name);
+
+    int whetherExistFocusMessageMapper(String name,String who);
 }

@@ -24,4 +24,12 @@
         select * from focus
     </select>
 
+    <select id="whetherExistLikeMessageMapper" resultType="int">
+        select count(like_id) from likes where post_id=#{post_id} and name=#{name}
+    </select>
+
+    <select id="whetherExistFocusMessageMapper" resultType="int">
+        select count(focus_id) from focus where name=#{name} and who=#{who}
+    </select>
+
 </mapper>

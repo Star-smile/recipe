@@ -47,7 +47,7 @@ public class ShowController {
 
     @ResponseBody
     @RequestMapping(value="likeMessage", method = RequestMethod.GET,produces = "application/json;charset=utf-8")
-    public Map<String, List<LikeBean> >likeMsg(@RequestParam("name") String name){
+    public Map<String, List<LikeBean>> likeMsg(@RequestParam("name") String name){
         List<LikeBean> result=service.getLikeMsgService(name);
         Map<String,List<LikeBean>> map=new HashMap<>();
         map.put("result",result);
@@ -56,10 +56,32 @@ public class ShowController {
 
     @ResponseBody
     @RequestMapping(value="focusMessage", method = RequestMethod.GET,produces = "application/json;charset=utf-8")
-    public Map<String, List<FocusBean> >focusMsg(@RequestParam("who") String who){
+    public Map<String, List<FocusBean>> focusMsg(@RequestParam("who") String who){
         List<FocusBean> result=service.getFocusMsgService(who);
         Map<String,List<FocusBean>> map=new HashMap<>();
         map.put("result",result);
         return map;
     }
+
+    @ResponseBody
+    @RequestMapping(value="whetherLike", method = RequestMethod.GET,produces = "application/json;charset=utf-8")
+    public Map<String, Boolean > likeExistMsg(@RequestParam("post_id") String post_id,
+                                             @RequestParam("name") String name){
+        Boolean result=service.whetherExistLikeMsgService(post_id, name);
+        Map<String,Boolean> map=new HashMap<>();
+        map.put("result",result);
+        return map;
+    }
+
+    @ResponseBody
+    @RequestMapping(value="whetherFocus", method = RequestMethod.GET,produces = "application/json;charset=utf-8")
+    public Map<String, Boolean > focusExistMsg(@RequestParam("name") String name,
+                                               @RequestParam("who") String who){
+        Boolean result=service.whetherExistFocusMsgService(name, who);
+        Map<String,Boolean> map=new HashMap<>();
+        map.put("result",result);
+        return map;
+    }
+
+
 }
