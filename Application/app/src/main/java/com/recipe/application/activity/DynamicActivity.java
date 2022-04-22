@@ -28,10 +28,11 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.recipe.application.MainActivity;
 import com.recipe.application.R;
 import com.recipe.application.dao.Brief_dish;
-import com.android.recipe.dao.Materials;
-import com.android.recipe.dao.Method;
+import com.recipe.application.dao.Materials;
+import com.recipe.application.dao.Method;
 import com.recipe.application.dao.Post;
 import com.recipe.application.dao.User;
 import com.recipe.application.utils.BitmapUtils;
@@ -39,7 +40,13 @@ import com.recipe.application.utils.CameraUtils;
 import com.bumptech.glide.Glide;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -529,136 +536,134 @@ public class DynamicActivity extends AppCompatActivity implements View.OnClickLi
                 isPublish=true;
                 preferences= PreferenceManager.getDefaultSharedPreferences(this);
                 String account=preferences.getString("account","");
-                BmobQuery<User> query=new BmobQuery<>();
-                query.addWhereEqualTo("username",account);
-                query.findObjects(new FindListener<User>() {
+
+
+
+
+                //发布菜谱接口
+                new Thread(){
                     @Override
-                    public void done(List<User> list, BmobException e) {
-                        if(e==null){
-                            for(User user:list){
-                                String cus_name=user.getName();
-                                String recipe_name=name.getText().toString();
-                                String ingredient=recipe.getText().toString();
-                                String consume=consumption.getText().toString();
-                                String tip=point.getText().toString();
-                                String story=brief.getText().toString();
-                                String cover=stringMap.get(process);
+                    public void run() {
+                        try {
 
-                                Post post=new Post();
-                                post.setName(recipe_name);
-                                post.setIntroduction(story);
-                                post.setTip(tip);
-                                post.setPeople(cus_name);
-                                post.setDegree(degree);
-                                post.setUser_time(use_time);
-                                post.setCover(cover);
-                                Brief_dish dish=new Brief_dish();
-                                dish.setObjectId(objectId);
-                                post.setType(dish);
-                                post.save(new SaveListener<String>() {
-                                    @Override
-                                    public void done(String s, BmobException e) {
-                                        if(e==null){
-                                            p_objectId=s;
-                                            if(layout.getVisibility()==View.VISIBLE) {
-                                                Materials materials = new Materials();
-                                                materials.setIngredient(ingredient);
-                                                materials.setConsumption(consume);
-                                                Post post1=new Post();
-                                                post1.setObjectId(p_objectId);
-                                                materials.setId(post1);
-                                                materials.save(new SaveListener<String>() {
-                                                    @Override
-                                                    public void done(String s, BmobException e) {
+                            //post信息
+                            String cus_name=account;
+                            String recipe_name=name.getText().toString();
+                            String ingredient=recipe.getText().toString();
+                            String consume=consumption.getText().toString();
+                            String tip=point.getText().toString();
+                            String story=brief.getText().toString();
+                            String cover=stringMap.get(process);
+                            Post post=new Post();
+                            post.setName(recipe_name);
+                            post.setIntroduction(story);
+                            post.setTip(tip);
+                            post.setPeople(cus_name);
+                            post.setDegree(degree);
+                            post.setUser_time(use_time);
+                            post.setCover(cover);
+                            Brief_dish dish=new Brief_dish();
 
-                                                    }
-                                                });
-                                            }
-                                            if(listIngredient.size()!=0){
-                                                for(int i=0;i<listIngredient.size();i++) {
-                                                    String use_ingredient = listIngredient.get(i).getText().toString();
-                                                    String use_consume = listConsume.get(i).getText().toString();
-                                                    Materials materials = new Materials();
-                                                    materials.setIngredient(use_ingredient);
-                                                    materials.setConsumption(use_consume);
-                                                    Post post1=new Post();
-                                                    post1.setObjectId(p_objectId);
-                                                    materials.setId(post1);
-                                                    materials.save(new SaveListener<String>() {
-                                                        @Override
-                                                        public void done(String s, BmobException e) {
-                                                        }
-                                                    });
-                                                }
-                                            }
-                                            if(linear1.getVisibility()!=View.GONE) {
-                                                Method method = new Method();
-                                                Post post1 = new Post();
-                                                post1.setObjectId(p_objectId);
-                                                method.setId(post1);
-                                                String sequence = process1.getText().toString();
-                                                String interpret1 = explain1.getText().toString();
-                                                String imageUrl = stringMap.get(image1);
-                                                method.setSequence(sequence);
-                                                method.setImage(imageUrl);
-                                                method.setExplain(interpret1);
-                                                method.save(new SaveListener<String>() {
-                                                    @Override
-                                                    public void done(String s, BmobException e) {
+                            post.setType(dish);
+                            //materials
+                            if(layout.getVisibility()==View.VISIBLE) {
+                                Materials materials = new Materials();
+                                materials.setIngredient(ingredient);
+                                materials.setConsumption(consume);
+                                Post post1=new Post();
+                                materials.setId(post1);
 
-                                                    }
-                                                });
-                                            }
-                                            if(linear2.getVisibility()!=View.GONE){
-                                                Method method1=new Method();
-                                                Post post2=new Post();
-                                                post2.setObjectId(p_objectId);
-                                                method1.setId(post2);
-                                                String two_sequence=process2.getText().toString();
-                                                String image_url=stringMap.get(image2);
-                                                String interpret2=explain2.getText().toString();
-                                                method1.setSequence(two_sequence);
-                                                method1.setImage(image_url);
-                                                method1.setExplain(interpret2);
-                                                method1.save(new SaveListener<String>() {
-                                                    @Override
-                                                    public void done(String s, BmobException e) {
-                                                    }
-                                                });
-                                            }
-                                            if(listProcess.size()!=0) {
-                                                for(int i=0;i<listProcess.size();i++){
-                                                    Method method2 = new Method();
-                                                    Post post3 = new Post();
-                                                    post3.setObjectId(p_objectId);
-                                                    method2.setId(post3);
-                                                    String more_sequence=listProcess.get(i).getText().toString();
-                                                    String more_image=stringMap.get(listImage.get(i));
-                                                    String more_explain=listExplain.get(i).getText().toString();
-                                                    method2.setSequence(more_sequence);
-                                                    method2.setImage(more_image);
-                                                    method2.setExplain(more_explain);
-                                                    method2.save(new SaveListener<String>() {
-                                                        @Override
-                                                        public void done(String s, BmobException e) {
-
-                                                        }
-                                                    });
-                                                }
-                                            }
-                                            Intent intent=new Intent(DynamicActivity.this,ShowActivity.class);
-                                            intent.putExtra("objectId",p_objectId);
-                                            startActivity(intent);
-
-                                        }else{
-                                            Toast.makeText(DynamicActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
                             }
+                            if(listIngredient.size()!=0){
+                                for(int i=0;i<listIngredient.size();i++) {
+                                    String use_ingredient = listIngredient.get(i).getText().toString();
+                                    String use_consume = listConsume.get(i).getText().toString();
+                                    Materials materials = new Materials();
+                                    materials.setIngredient(use_ingredient);
+                                    materials.setConsumption(use_consume);
+                                    Post post1=new Post();
+                                    materials.setId(post1);
+
+                                }
+                            }
+
+                                Method method = new Method();
+                                Post post1 = new Post();
+                                method.setId(post1);
+                                String sequence = process1.getText().toString();
+                                String interpret1 = explain1.getText().toString();
+                                String imageUrl = stringMap.get(image1);
+                                method.setSequence(sequence);
+                                method.setImage(imageUrl);
+                                method.setExplain(interpret1);
+
+
+                            if(linear2.getVisibility()!=View.GONE){
+                                Method method1=new Method();
+                                Post post2=new Post();
+                                method1.setId(post2);
+                                String two_sequence=process2.getText().toString();
+                                String image_url=stringMap.get(image2);
+                                String interpret2=explain2.getText().toString();
+                                method1.setSequence(two_sequence);
+                                method1.setImage(image_url);
+                                method1.setExplain(interpret2);
+
+                            }
+                            if(listProcess.size()!=0) {
+                                for(int i=0;i<listProcess.size();i++){
+                                    Method method2 = new Method();
+                                    Post post3 = new Post();
+                                    method2.setId(post3);
+                                    String more_sequence=listProcess.get(i).getText().toString();
+                                    String more_image=stringMap.get(listImage.get(i));
+                                    String more_explain=listExplain.get(i).getText().toString();
+                                    method2.setSequence(more_sequence);
+                                    method2.setImage(more_image);
+                                    method2.setExplain(more_explain);
+
+                                }
+                            }
+//                    Thread.sleep(5000);
+                            String path="http://mdzs.free.svipss.top/publish";
+                            URL url = new URL(path);
+                            //打开httpurlconnection
+                            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                            conn.setRequestMethod("POST");              //设置POST方式获取数据
+                            conn.setConnectTimeout(5000);              //设置连接超时时间5秒
+                            conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");  //如果设置方式为post，则必须制定该属性
+                            //将数据进行编码,然后会自动的将该数据放到post中传到后台
+                            String data="post="+ URLEncoder.encode(post.toString(),"utf-8")+"&materials="+ URLEncoder.encode(mater,"utf-8");
+//                            String data="userID="+ URLEncoder.encode("123456","utf-8")+"&userPwd="+URLEncoder.encode("123456","utf-8")+"&userName="+URLEncoder.encode("123456","utf-8")+"&phoneNumber="+URLEncoder.encode("123456","utf-8");
+                            //指定长度
+                            conn.setRequestProperty("Content-length",String.valueOf(data.length()));
+                            conn.setDoOutput(true); //指定输出模式
+                            conn.getOutputStream().write(data.getBytes());  //将要传递的数据写入输出流
+                            int code = conn.getResponseCode();         // 获取response状态，200表示成功获取资源，404表示资源不存在
+                            if (code==200){
+                                InputStream is=conn.getInputStream();
+                                BufferedReader br=new BufferedReader(new InputStreamReader(is));
+                                StringBuffer sb=new StringBuffer();
+                                String len=null;
+                                while((len=br.readLine())!=null){
+                                    sb.append(len);
+                                }
+                                String result=sb.toString();
+
+//                                showMsg(result);
+                                Log.d("登陆", result);
+                                Intent intent=new Intent(DynamicActivity.this,ShowActivity.class);
+                                intent.putExtra("objectId",p_objectId);
+                                startActivity(intent);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Log.d("Activity", "cuowu");
+//                            showMsg("不成功");
                         }
                     }
-                });
+                }.start();
+
                 isPublish=false;
         }
     }
@@ -671,17 +676,6 @@ public class DynamicActivity extends AppCompatActivity implements View.OnClickLi
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             //如果你是在Fragment中，则把this换成getActivity()
             rxPermissions = new RxPermissions(this);
-            //权限请求
-            rxPermissions.request(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    .subscribe(granted -> {
-                        if (granted) {//申请成功
-                            showMsg("已获取权限");
-                            hasPermissions = true;
-                        } else {//申请失败
-                            showMsg("权限未开启");
-                            hasPermissions = false;
-                        }
-                    });
         } else {
             //Android6.0以下
             showMsg("无需请求动态权限");
