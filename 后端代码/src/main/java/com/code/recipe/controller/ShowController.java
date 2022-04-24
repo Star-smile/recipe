@@ -101,4 +101,13 @@ public class ShowController {
         return map;
     }
 
+    @ResponseBody
+    @RequestMapping(value="showComment", method = RequestMethod.GET,produces = "application/json;charset=utf-8")
+    public Map<String, List<CommentBean>> showCommentMsg(@RequestParam("post_id") String post_id){
+        List<CommentBean> result=service.getCommentMsgService(post_id);
+        Map<String,List<CommentBean>> map=new HashMap<>();
+        map.put("result",result);
+        return map;
+    }
+
 }

@@ -28,6 +28,10 @@
         select * from likes
     </select>
 
+    <select id="getCommentMsgMapper" resultType="com.code.recipe.bean.CommentBean">
+        select * from comment where post_id=#{post_id}
+    </select>
+
     <select id="getFocusMsgMapper" resultType="com.code.recipe.bean.FocusBean">
         select * from focus
     </select>

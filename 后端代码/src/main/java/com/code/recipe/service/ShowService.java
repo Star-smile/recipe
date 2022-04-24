@@ -52,4 +52,8 @@ public class ShowService {
         int rs= mapper.whetherExistFocusMessageMapper(name,who);
         return rs==1;
     }
+
+    public List<CommentBean> getCommentMsgService(String post_id){
+        return mapper.getCommentMsgMapper(post_id);
+    }
 }
