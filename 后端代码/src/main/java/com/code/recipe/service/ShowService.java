@@ -35,8 +35,14 @@ public class ShowService {
 
     }
 
-    public List<LikeBean> getLikeMsgService(String name){
-        return mapper.getLikeMsgMapper(name);
+    public List<PostBean> getLikeMsgService(String name){
+        List<LikeBean> list=mapper.getLikeMsgMapper(name);
+        List<PostBean> postBeanList=null;
+        for (LikeBean likeBean : list) {
+            PostBean bean = mapper.getPostMsgMapper(likeBean.getPost_id());
+            postBeanList.add(bean);
+        }
+        return postBeanList;
     }
 
     public List<FocusBean> getFocusMsgService(String who){

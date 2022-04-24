@@ -65,9 +65,9 @@ public class ShowController {
 
     @ResponseBody
     @RequestMapping(value="likeMessage", method = RequestMethod.GET,produces = "application/json;charset=utf-8")
-    public Map<String, List<LikeBean>> likeMsg(@RequestParam("name") String name){
-        List<LikeBean> result=service.getLikeMsgService(name);
-        Map<String,List<LikeBean>> map=new HashMap<>();
+    public Map<String, List<PostBean>> likeMsg(@RequestParam("name") String name){
+        List<PostBean> result=service.getLikeMsgService(name);
+        Map<String,List<PostBean>> map=new HashMap<>();
         map.put("result",result);
         return map;
     }
