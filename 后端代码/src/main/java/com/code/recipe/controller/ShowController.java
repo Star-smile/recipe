@@ -110,4 +110,14 @@ public class ShowController {
         return map;
     }
 
+    @ResponseBody
+    @RequestMapping(value="showSameNavPost", method = RequestMethod.GET,produces = "application/json;charset=utf-8")
+    public Map<String, List<PostBean>> showSameNavPostMsg(@RequestParam("nav_name") String nav_name){
+        List<PostBean> result=service.getSameNavPost(nav_name);
+        Map<String,List<PostBean>> map=new HashMap<>();
+        map.put("result",result);
+        return map;
+    }
+
+
 }

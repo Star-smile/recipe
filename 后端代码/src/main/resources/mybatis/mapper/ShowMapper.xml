@@ -44,4 +44,12 @@
         select count(focus_id) from focus where name=#{name} and who=#{who}
     </select>
 
+    <select id="getNav_idMapper" resultType="string">
+        select nav_id from nav where nav_name=#{nav_name}
+    </select>
+
+    <select id="getSameNavPost" resultType="com.code.recipe.bean.PostBean">
+        select * from post where nav_id=#{nav_id}
+    </select>
+
 </mapper>

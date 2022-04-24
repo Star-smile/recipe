@@ -28,4 +28,8 @@ public interface ShowMapper {
 
     int whetherExistFocusMessageMapper(String name,String who);
 
+    String getNav_idMapper(String nav_name);
+
+    List<PostBean>  getSameNavPost(String nav_id);
+
 }

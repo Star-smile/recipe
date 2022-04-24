@@ -56,4 +56,9 @@ public class ShowService {
     public List<CommentBean> getCommentMsgService(String post_id){
         return mapper.getCommentMsgMapper(post_id);
     }
+
+    public List<PostBean> getSameNavPost(String nav_name){
+        String nav_id=mapper.getNav_idMapper(nav_name);
+        return mapper.getSameNavPost(nav_id);
+    }
 }
