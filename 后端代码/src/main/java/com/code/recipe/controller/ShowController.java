@@ -46,6 +46,24 @@ public class ShowController {
     }
 
     @ResponseBody
+    @RequestMapping(value="showMaterial", method = RequestMethod.GET,produces = "application/json;charset=utf-8")
+    public Map<String, List<MaterialBean> > showMaterialMsg(@RequestParam("post_id") String post_id){
+        List<MaterialBean> result=service.getMaterialMsgService(post_id);
+        Map<String,List<MaterialBean>> map=new HashMap<>();
+        map.put("result",result);
+        return map;
+    }
+
+    @ResponseBody
+    @RequestMapping(value="showMethod", method = RequestMethod.GET,produces = "application/json;charset=utf-8")
+    public Map<String, List<MethodBean> > showMethodMsg(@RequestParam("post_id") String post_id){
+        List<MethodBean> result=service.getMethodMsgService(post_id);
+        Map<String,List<MethodBean>> map=new HashMap<>();
+        map.put("result",result);
+        return map;
+    }
+
+    @ResponseBody
     @RequestMapping(value="likeMessage", method = RequestMethod.GET,produces = "application/json;charset=utf-8")
     public Map<String, List<LikeBean>> likeMsg(@RequestParam("name") String name){
         List<LikeBean> result=service.getLikeMsgService(name);
@@ -82,6 +100,5 @@ public class ShowController {
         map.put("result",result);
         return map;
     }
-
 
 }

@@ -16,6 +16,14 @@
         select * from post where post_id=#{post_id}
     </select>
 
+    <select id="getMaterialMsgMapper" resultType="com.code.recipe.bean.MaterialBean">
+        select * from material from where post_id=#{post_id}
+    </select>
+
+    <select id="getMethodMsgMapper" resultType="com.code.recipe.bean.MethodBean">
+        select * from methods where post_id=#{post_id} order by seq
+    </select>
+
     <select id="getLikeMsgMapper" resultType="com.code.recipe.bean.LikeBean">
         select * from likes
     </select>

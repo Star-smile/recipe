@@ -14,6 +14,10 @@ public interface ShowMapper {
 
     PostBean getPostMsgMapper(String post_id);
 
+    List<MaterialBean> getMaterialMsgMapper(String post_id);
+
+    List<MethodBean> getMethodMsgMapper(String post_id);
+
     List<LikeBean> getLikeMsgMapper(String name);
 
     List<FocusBean> getFocusMsgMapper(String who);
@@ -21,4 +25,5 @@ public interface ShowMapper {
     int whetherExistLikeMessageMapper(String post_id,String name);
 
     int whetherExistFocusMessageMapper(String name,String who);
+
 }

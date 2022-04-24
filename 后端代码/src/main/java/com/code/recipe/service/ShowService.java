@@ -25,6 +25,16 @@ public class ShowService {
         return mapper.getPostMsgMapper(post_id);
     }
 
+    public List<MaterialBean> getMaterialMsgService(String post_id){
+        return mapper.getMaterialMsgMapper(post_id);
+
+    }
+
+    public List<MethodBean> getMethodMsgService(String post_id){
+        return mapper.getMethodMsgMapper(post_id);
+
+    }
+
     public List<LikeBean> getLikeMsgService(String name){
         return mapper.getLikeMsgMapper(name);
     }
