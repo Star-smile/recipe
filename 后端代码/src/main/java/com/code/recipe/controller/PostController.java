@@ -22,7 +22,6 @@ public class PostController {
     @ResponseBody
     @RequestMapping(value="publish", method = RequestMethod.POST,produces = "application/json;charset=utf-8")
     public Map<String,String> publishController(@RequestBody PublishBean publishBean){
-        System.out.print(publishBean);
         PostBean post=publishBean.getPost();
         List<MethodBean> methods=publishBean.getMethods();
         List<MaterialBean> materials=publishBean.getMaterials();

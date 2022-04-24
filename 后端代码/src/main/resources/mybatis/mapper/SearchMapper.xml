@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.code.recipe.dao.SearchMapper">
+
+    <select id="getSearchPostMsgMapperByName" resultType="com.code.recipe.bean.PostBean">
+        select * from post where name=#{name}
+    </select>
+
+    <select id="getSearchPostMsgMapperByIntroduction" resultType="com.code.recipe.bean.PostBean">
+        select * from post where introduction like concat('%',#{name},'%')
+    </select>
+
+    <select id="getSearchPost_idByIngredient" resultMap="postIdMsg">
+        select post_id from material where ingredient like concat('%',#{name},'%')
+    </select>
+
+    <resultMap id="postIdMsg" type="string">
+        <result column="post_id" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getSearchPostMsgByPost_id" resultType="com.code.recipe.bean.PostBean">
+        select * from post where post_id=#{post_id}
+    </select>
+</mapper>
