@@ -35,4 +35,14 @@ public class UserService {
         }
     }
 
+    public boolean changeNameService(String user_id,String newName){
+        String  userId=mapper.seeUserId(user_id);
+        if(userId != null){
+            int res=mapper.changeNameMapper(user_id, newName);
+            return res==1;
+        }else{
+            return false;
+        }
+    }
+
 }

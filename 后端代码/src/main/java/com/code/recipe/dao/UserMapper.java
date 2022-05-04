@@ -13,4 +13,6 @@ public interface UserMapper {
 
     int userResetMapper(String userID,String userPwd);
 
+    int changeNameMapper(String user_id,String newName);
+
 }

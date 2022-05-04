@@ -46,4 +46,14 @@ public class UserController {
         map.put("result",result);
         return map;
     }
+
+    @ResponseBody
+    @RequestMapping(value="changeName", method = RequestMethod.GET,produces = "application/json;charset=utf-8")
+    public Map<String,Boolean> changeName(@RequestParam("user_id") String user_id,
+                                     @RequestParam("newName") String newName){
+        boolean result=service.changeNameService(user_id, newName);
+        Map<String,Boolean> map=new HashMap<>();
+        map.put("result",result);
+        return map;
+    }
 }

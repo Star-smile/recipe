@@ -25,4 +25,8 @@
         update user set pwd=#{userPwd} where user_id=#{userID}
     </update>
 
+    <update id="changeNameMapper" parameterType="string">
+        update user set name=#{newName} where user_id=#{user_id}
+    </update>
+
 </mapper>
