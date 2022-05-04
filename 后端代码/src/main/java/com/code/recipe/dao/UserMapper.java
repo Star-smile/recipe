@@ -15,4 +15,6 @@ public interface UserMapper {
 
     int changeNameMapper(String user_id,String newName);
 
+    int changeImageMapper(String user_id,String newImage);
+
 }

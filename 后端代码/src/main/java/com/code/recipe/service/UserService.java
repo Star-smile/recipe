@@ -45,4 +45,15 @@ public class UserService {
         }
     }
 
+    public boolean changeImageService(String user_id,String newImage){
+        String userID=mapper.seeUserId(user_id);
+        if(userID!=null){
+            int res= mapper.changeImageMapper(user_id, newImage);
+            return res==1;
+        }
+        else{
+            return false;
+        }
+    }
+
 }

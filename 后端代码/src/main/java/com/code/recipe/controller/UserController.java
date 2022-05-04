@@ -56,4 +56,14 @@ public class UserController {
         map.put("result",result);
         return map;
     }
+
+    @ResponseBody
+    @RequestMapping(value="changeImage", method = RequestMethod.GET,produces = "application/json;charset=utf-8")
+    public Map<String,Boolean> changeImage(@RequestParam("user_id") String user_id,
+                                          @RequestParam("newImage") String newImage){
+        boolean result=service.changeImageService(user_id, newImage);
+        Map<String,Boolean> map=new HashMap<>();
+        map.put("result",result);
+        return map;
+    }
 }

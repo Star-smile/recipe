@@ -29,4 +29,8 @@
         update user set name=#{newName} where user_id=#{user_id}
     </update>
 
+    <update id="changeImageMapper" parameterType="string">
+        update user set image=#{newImage} where user_id=#{user_id}
+    </update>
+
 </mapper>
