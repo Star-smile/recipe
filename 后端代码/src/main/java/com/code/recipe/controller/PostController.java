@@ -20,13 +20,22 @@ public class PostController {
     PostService postService;
 
     @ResponseBody
-    @RequestMapping(value="publish", method = RequestMethod.POST,produces = "application/json;charset=utf-8")
-    public Map<String,String> publishController(@RequestBody PublishBean publishBean){
+    @RequestMapping(value="publishPost", method = RequestMethod.POST,produces = "application/json;charset=utf-8")
+    public Map<String,String> publishPostController(@RequestBody PublishBean publishBean){
         PostBean post=publishBean.getPost();
         List<MethodBean> methods=publishBean.getMethods();
         List<MaterialBean> materials=publishBean.getMaterials();
        String result=postService.publishService(post, materials, methods);
         Map<String,String> map=new HashMap<>();
+        map.put("result",result);
+        return map;
+    }
+
+    @ResponseBody
+    @RequestMapping(value="removePost", method = RequestMethod.POST,produces = "application/json;charset=utf-8")
+    public Map<String,Boolean> removePostController(@RequestParam("post_id") String post_id){
+        boolean result=postService.removePostService(post_id);
+        Map<String,Boolean> map=new HashMap<>();
         map.put("result",result);
         return map;
     }

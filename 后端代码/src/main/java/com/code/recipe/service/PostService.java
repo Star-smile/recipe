@@ -48,4 +48,9 @@ public class PostService {
         else
             return null;
     }
+
+    public boolean removePostService(String post_id){
+        int res=mapper.removePostMapper(post_id);
+        return res==1;
+    }
 }

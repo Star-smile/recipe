@@ -40,4 +40,8 @@
                    #{interpret}
                )
     </insert>
+
+    <delete id="removePostMapper">
+        delete from post where post_id=#{post_id}
+    </delete>
 </mapper>

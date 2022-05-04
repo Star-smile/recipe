@@ -13,4 +13,6 @@ public interface PostMapper {
     int insertMaterial(MaterialBean materialBean);
 
     int insertMethod(MethodBean methodBean);
+
+    int removePostMapper(String post_id);
 }
