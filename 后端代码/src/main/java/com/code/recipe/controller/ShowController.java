@@ -119,5 +119,14 @@ public class ShowController {
         return map;
     }
 
+    @ResponseBody
+    @RequestMapping(value="showUserPost", method = RequestMethod.GET,produces = "application/json;charset=utf-8")
+    public Map<String, List<PostBean>> showUserPostMsg(@RequestParam("user_id") String user_id){
+        List<PostBean> result=service.getUserPostMsg(user_id);
+        Map<String,List<PostBean>> map=new HashMap<>();
+        map.put("result",result);
+        return map;
+    }
+
 
 }

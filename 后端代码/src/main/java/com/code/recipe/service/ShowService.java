@@ -67,4 +67,9 @@ public class ShowService {
         String nav_id=mapper.getNav_idMapper(nav_name);
         return mapper.getSameNavPost(nav_id);
     }
+
+
+    public List<PostBean> getUserPostMsg(String user_id){
+        return mapper.getUserPost(user_id);
+    }
 }

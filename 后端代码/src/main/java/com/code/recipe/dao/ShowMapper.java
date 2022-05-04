@@ -32,4 +32,6 @@ public interface ShowMapper {
 
     List<PostBean>  getSameNavPost(String nav_id);
 
+    List<PostBean>  getUserPost(String user_id);
+
 }
