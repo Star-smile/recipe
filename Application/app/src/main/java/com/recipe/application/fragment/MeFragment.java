@@ -221,6 +221,45 @@ public class MeFragment extends Fragment {
         startActivityForResult(CameraUtils.getSelectPhotoIntent(), SELECT_PHOTO);
     }
 
+    /**
+     * 更换头像
+     */
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        ShapeableImageView imageView=rootView.findViewById(R.id.iv_head);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomSheetDialog = new BottomSheetDialog(getContext());
+                bottomView = getLayoutInflater().inflate(R.layout.dialog_bottom, null);
+                bottomSheetDialog.setContentView(bottomView);
+                bottomSheetDialog.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundColor(Color.TRANSPARENT);
+                TextView tvTakePictures = bottomView.findViewById(R.id.tv_take_pictures);
+                TextView tvOpenAlbum = bottomView.findViewById(R.id.tv_open_album);
+                TextView tvCancel = bottomView.findViewById(R.id.tv_cancel);
+
+                //拍照
+                tvTakePictures.setOnClickListener(v -> {
+                    takePhoto();
+                    showMsg("拍照");
+                    bottomSheetDialog.cancel();
+                });
+                //打开相册
+                tvOpenAlbum.setOnClickListener(v -> {
+                    openAlbum();
+                    showMsg("打开相册");
+                    bottomSheetDialog.cancel();
+                });
+                //取消
+                tvCancel.setOnClickListener(v -> {
+                    bottomSheetDialog.cancel();
+                });
+                //底部弹窗显示
+                bottomSheetDialog.show();
+            }
+        });
+    }
+
     private void initView() {
     }
     private void showMsg(String msg) {
