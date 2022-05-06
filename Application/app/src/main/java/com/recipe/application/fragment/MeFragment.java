@@ -1,38 +1,77 @@
 package com.recipe.application.fragment;
 
+import android.Manifest;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TabHost;
 import android.widget.TextView;
-
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
-import com.google.android.material.imageview.ShapeableImageView;
-import com.recipe.application.R;
-
+import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.bumptech.glide.Glide;
+import com.recipe.application.R;
+import com.recipe.application.activity.DynamicActivity;
+import com.recipe.application.dao.Post;
 import com.recipe.application.dao.User;
+import com.recipe.application.utils.BitmapUtils;
+import com.recipe.application.utils.CameraUtils;
 import com.recipe.application.utils.SPUtils;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.imageview.ShapeableImageView;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
-import java.io.Serializable;
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+
 
 
 public class MeFragment extends Fragment {
 
-    private View rootView;
-    private SharedPreferences preferences;
+    //权限请求
+    private RxPermissions rxPermissions;
+    //是否拥有权限
+    private boolean hasPermissions = false;
+    //底部弹窗
+    private BottomSheetDialog bottomSheetDialog;
+    //弹窗视图
+    private View bottomView;
+    //存储拍完照后的图片
+    private File outputImagePath;
+    //启动相机标识
+    public static final int TAKE_PHOTO = 1;
+    //启动相册标识
+    public static final int SELECT_PHOTO = 2;
+
     //图片控件
     private ShapeableImageView ivHead;
+    //拍照和相册获取图片的Bitmap
+    private Bitmap orc_bitmap;
+
+    private View rootView;
+
+    private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
 
+    private TabHost tabHost;
 
     //Glide请求图片选项配置
     private RequestOptions requestOptions = RequestOptions.circleCropTransform()
@@ -129,7 +168,63 @@ public class MeFragment extends Fragment {
         return rootView;
     }
 
+    private void checkVersion() {
+        //Android6.0及以上版本
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            //如果你是在Fragment中，则把this换成getActivity()
+            RxPermissions rxPermissions = new RxPermissions(getActivity());
+            //权限请求
+            rxPermissions
+                    .request(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    .subscribe(granted -> {
+                        if (granted) {//申请成功
+                            showMsg("已获取权限");
+                            hasPermissions = true;
+                        } else {//申请失败
+                            showMsg("权限未开启");
+                            hasPermissions = false;
+                        }
+                    });
+        } else {
+            //Android6.0以下
+            showMsg("无需请求动态权限");
+        }
+    }
+
+    /**
+     * 拍照
+     */
+    private void takePhoto() {
+        if (!hasPermissions) {
+            showMsg("未获取到权限");
+            checkVersion();
+            return;
+        }
+        SimpleDateFormat timeStampFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
+        String filename = timeStampFormat.format(new Date());
+        outputImagePath = new File(getContext().getExternalCacheDir(),
+                filename + ".jpg");
+        Intent takePhotoIntent = CameraUtils.getTakePhotoIntent(getContext(), outputImagePath);
+        // 开启一个带有返回值的Activity，请求码为TAKE_PHOTO
+        startActivityForResult(takePhotoIntent, TAKE_PHOTO);
+    }
+
+    /**
+     * 打开相册
+     */
+    private void openAlbum() {
+        if (!hasPermissions) {
+            showMsg("未获取到权限");
+            checkVersion();
+            return;
+        }
+        startActivityForResult(CameraUtils.getSelectPhotoIntent(), SELECT_PHOTO);
+    }
+
     private void initView() {
+    }
+    private void showMsg(String msg) {
+        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
 }
