@@ -566,8 +566,9 @@ public class DynamicActivity extends AppCompatActivity implements View.OnClickLi
 
                             post.setType(dish);
                             //materials
+                            Materials materials = new Materials();
+
                             if(layout.getVisibility()==View.VISIBLE) {
-                                Materials materials = new Materials();
                                 materials.setIngredient(ingredient);
                                 materials.setConsumption(consume);
                                 Post post1=new Post();
@@ -578,7 +579,6 @@ public class DynamicActivity extends AppCompatActivity implements View.OnClickLi
                                 for(int i=0;i<listIngredient.size();i++) {
                                     String use_ingredient = listIngredient.get(i).getText().toString();
                                     String use_consume = listConsume.get(i).getText().toString();
-                                    Materials materials = new Materials();
                                     materials.setIngredient(use_ingredient);
                                     materials.setConsumption(use_consume);
                                     Post post1=new Post();
@@ -633,7 +633,7 @@ public class DynamicActivity extends AppCompatActivity implements View.OnClickLi
                             conn.setConnectTimeout(5000);              //设置连接超时时间5秒
                             conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");  //如果设置方式为post，则必须制定该属性
                             //将数据进行编码,然后会自动的将该数据放到post中传到后台
-                            String data="post="+ URLEncoder.encode(post.toString(),"utf-8")+"&materials="+ URLEncoder.encode(mater,"utf-8");
+                            String data="post="+ URLEncoder.encode(post.toString(),"utf-8")+"&materials="+ URLEncoder.encode(materials.toString(),"utf-8");
 //                            String data="userID="+ URLEncoder.encode("123456","utf-8")+"&userPwd="+URLEncoder.encode("123456","utf-8")+"&userName="+URLEncoder.encode("123456","utf-8")+"&phoneNumber="+URLEncoder.encode("123456","utf-8");
                             //指定长度
                             conn.setRequestProperty("Content-length",String.valueOf(data.length()));

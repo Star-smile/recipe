@@ -24,7 +24,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Application">
-        <activity android:name=".activity.PersonalActivity"></activity>
+        <activity
+            android:name=".activity.ShowActivity"
+            android:exported="false" />
+        <activity android:name=".activity.PersonalActivity" />
         <activity
             android:name=".activity.DynamicActivity"
             android:exported="false" />
