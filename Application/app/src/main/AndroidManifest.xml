@@ -25,6 +25,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Application">
         <activity
+            android:name=".activity.SortActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.ShowActivity"
             android:exported="false" />
         <activity android:name=".activity.PersonalActivity" />

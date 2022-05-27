@@ -31,4 +31,7 @@ public class Focus implements Serializable {
                 ", who='" + who + '\'' +
                 '}';
     }
+    public void delete(){
+
+    }
 }
