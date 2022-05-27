@@ -1,7 +1,5 @@
 package com.recipe.application.fragment;
 
-import static com.recipe.application.base.BaseApplication.getContext;
-
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -21,7 +19,7 @@ import java.util.Map;
 
 
 
-public class FindFragment {
+public class FindFragment extends BasePutToRefreshFragment<SortListAdapterGV>{
 
     private SortListAdapterGV mSortListAdapter;
 
@@ -65,19 +63,9 @@ public class FindFragment {
      * “单元”列表下拉刷新具体实现
      */
     private void putToRefreshByUnit() {
-        //初始化Bmob查询类
-        BmobQuery<Type> query = new BmobQuery<>();
-        //执行查询，查询单元表 取出所有单元
-        query.findObjects(new FindListener<Type>() {
-            @Override
-            public void done(List<Type> list, BmobException e) {
-                if(e==null)
-                {
+        List list=new ArrayList();
                     requestPointByUnits(list);
                 }
-            }
-        });
-    }
 
     /**
      * 初始化页面
@@ -85,15 +73,7 @@ public class FindFragment {
     private void requestPointByUnits(final List<Type> typeList) {
         //初始化Adapter数据结构
         final List<Map<String, List<Brief_dish>>> listGroup = new ArrayList<>();
-        //执行查询，查询知识点表 取出所有知识点
-        BmobQuery<Brief_dish> query = new BmobQuery<>();
-        query.findObjects(new FindListener<Brief_dish>() {
-            @Override
-            public void done(List<Brief_dish> list, BmobException e) {
-                if(e==null)
-                {
-                    //打包Adapter数据
-                    packetAdapterData(list, typeList, listGroup);
+
                     //更新Adapter
                     mAdapter.notifyAdapter(listGroup);
                     if (listGroup.size() != 0) {
@@ -105,9 +85,8 @@ public class FindFragment {
                     mPtrFrameLayout.setVisibility(View.VISIBLE);
                     mPtrFrameLayout.refreshComplete();
                 }
-            }
-        });
-    }
+
+
 
     /**
      * 读取缓存
@@ -150,7 +129,7 @@ public class FindFragment {
             Map<String, List<Brief_dish>> map = new HashMap<>();
             List<Brief_dish> dishesForType = new ArrayList<Brief_dish>();
             for (Brief_dish dish:dishList) {
-                if (dish.getType_id().getObjectId().equals(type.getObjectId())) {
+                if (dish.getType_id().toString().equals(type.toString())) {
                     dishesForType.add(dish);
                 }
             }
