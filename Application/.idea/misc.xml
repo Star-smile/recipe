@@ -5,13 +5,19 @@
       <map>
         <entry key="..\:/android/recipe/recipe/Application/app/src/main/res/layout/activity_dynamic.xml" value="0.109375" />
         <entry key="..\:/android/recipe/recipe/Application/app/src/main/res/layout/activity_main.xml" value="0.109375" />
+        <entry key="..\:/android/recipe/recipe/Application/app/src/main/res/layout/activity_personal.xml" value="0.19293478260869565" />
         <entry key="..\:/android/recipe/recipe/Application/app/src/main/res/layout/activity_primary.xml" value="0.109375" />
         <entry key="..\:/android/recipe/recipe/Application/app/src/main/res/layout/activity_register.xml" value="0.1" />
         <entry key="..\:/android/recipe/recipe/Application/app/src/main/res/layout/activity_reset.xml" value="0.109375" />
         <entry key="..\:/android/recipe/recipe/Application/app/src/main/res/layout/activity_show.xml" value="0.24947916666666667" />
         <entry key="..\:/android/recipe/recipe/Application/app/src/main/res/layout/activity_sort.xml" value="0.1453804347826087" />
+        <entry key="..\:/android/recipe/recipe/Application/app/src/main/res/layout/fragment_collection.xml" value="0.18854166666666666" />
+        <entry key="..\:/android/recipe/recipe/Application/app/src/main/res/layout/fragment_fan.xml" value="0.19293478260869565" />
+        <entry key="..\:/android/recipe/recipe/Application/app/src/main/res/layout/fragment_find.xml" value="0.19293478260869565" />
         <entry key="..\:/android/recipe/recipe/Application/app/src/main/res/layout/list_appraisal.xml" value="0.21041666666666667" />
+        <entry key="..\:/android/recipe/recipe/Application/app/src/main/res/layout/list_fan.xml" value="0.1" />
         <entry key="..\:/android/recipe/recipe/Application/app/src/main/res/layout/list_materials.xml" value="0.24947916666666667" />
+        <entry key="..\:/android/recipe/recipe/Application/app/src/main/res/layout/list_msg_item.xml" value="0.19293478260869565" />
         <entry key="..\:/android/recipe/recipe/Application/app/src/main/res/layout/list_review_item_gv.xml" value="0.16530797101449277" />
         <entry key="..\:/android/recipe/recipe/Application/app/src/main/res/layout/list_usage.xml" value="0.2526041666666667" />
       </map>
