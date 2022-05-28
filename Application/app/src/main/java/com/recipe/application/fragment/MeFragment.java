@@ -260,7 +260,143 @@ public class MeFragment extends Fragment {
         });
     }
 
+
+
+
+
+
+    /**
+     * 返回到Activity
+     */
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            //拍照后返回
+            case TAKE_PHOTO:
+                if (resultCode == -1) {
+                    //显示图片
+                    displayImage(outputImagePath.getAbsolutePath());
+                }
+                break;
+            //打开相册后返回
+            case SELECT_PHOTO:
+                if (resultCode == -1) {
+                    String imagePath = null;
+                    //判断手机系统版本号
+                    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
+                        //4.4及以上系统使用这个方法处理图片
+                        imagePath = CameraUtils.getImageOnKitKatPath(data, getContext());
+                    } else {
+                        imagePath = CameraUtils.getImageBeforeKitKatPath(data, getContext());
+                    }
+
+                    //放入缓存
+                    SPUtils.putString("imageUrl",imagePath,getContext());
+
+                    //显示图片
+                    displayImage(imagePath);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * 通过图片路径显示图片
+     */
+    private void displayImage(String imagePath) {
+
+        if (!TextUtils.isEmpty(imagePath)) {
+
+            //放入缓存
+            SPUtils.putString("imageUrl",imagePath,getContext());
+
+            final User user=new User();
+            user.setImage(imagePath);
+
+            Toast.makeText(getContext(),"存入数据库成功",Toast.LENGTH_SHORT).show();
+
+
+
+            //显示图片
+            Glide.with(this).load(imagePath).apply(requestOptions).into(ivHead);
+
+            //压缩图片
+            orc_bitmap = CameraUtils.compression(BitmapFactory.decodeFile(imagePath));
+            //转Base64
+            //Base64
+            String base64Pic = BitmapUtils.bitmapToBase64(orc_bitmap);
+
+        } else {
+            showMsg("图片获取失败");
+        }
+    }
+
+
     private void initView() {
+        tabHost=rootView.findViewById(R.id.tabhost);
+        tabHost.setup();
+
+        LayoutInflater i=LayoutInflater.from(getContext());
+        i.inflate(R.layout.fragment_recipe,tabHost.getTabContentView());
+        i.inflate(R.layout.fragment_work,tabHost.getTabContentView());
+        i.inflate(R.layout.fragment_collection,tabHost.getTabContentView());
+        i.inflate(R.layout.fragment_fan,tabHost.getTabContentView());
+
+
+        TabHost.TabSpec tabSpec = tabHost.newTabSpec("tab1")
+                .setIndicator("菜谱", ResourcesCompat.getDrawable(getResources(), R.drawable.work, null))
+                .setContent(R.id.fragment_recipe);
+        tabHost.addTab(tabSpec);
+
+        tabSpec = tabHost.newTabSpec("tab2")
+                .setIndicator("关注", ResourcesCompat.getDrawable(getResources(), R.drawable.work,null))
+                .setContent(R.id.fragment_work);
+        tabHost.addTab(tabSpec);
+
+        tabSpec = tabHost.newTabSpec("tab3")
+                .setIndicator("收藏",ResourcesCompat.getDrawable(getResources(),  R.drawable.work, null))
+                .setContent(R.id.fragment_collection);
+        tabHost.addTab(tabSpec);
+
+        tabSpec = tabHost.newTabSpec("tab4")
+                .setIndicator("粉丝",ResourcesCompat.getDrawable(getResources(),  R.drawable.work, null))
+                .setContent(R.id.fragment_fan);
+        tabHost.addTab(tabSpec);
+
+        tabHost.getTabWidget().setShowDividers(0);
+
+        //记录tabHost的点击事件
+        tabHost.setOnTabChangedListener(tabId -> {
+            if(tabId.equals("tab1")){
+                //点击tab1动态加载复习页面
+                FragmentTransaction fragmentTransaction =getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(android.R.id.tabcontent, new RecipeFragment());
+                fragmentTransaction.commit();
+            }
+            if(tabId.equals("tab2")){
+                //点击tab2进入测试页面
+                FragmentTransaction fragmentTransaction =getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(android.R.id.tabcontent, new WorkFragment());
+                fragmentTransaction.commit();
+            }
+            if(tabId.equals("tab3")){
+                //点击tab3进入设置页面
+                FragmentTransaction fragmentTransaction =getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(android.R.id.tabcontent, new CollectionFragment());
+                fragmentTransaction.commit();
+
+            }
+            if(tabId.equals("tab4")){
+                //点击tab3进入设置页面
+                FragmentTransaction fragmentTransaction =getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(android.R.id.tabcontent, new FanFragment());
+                fragmentTransaction.commit();
+
+            }
+        });
 
     }
     private void showMsg(String msg) {
