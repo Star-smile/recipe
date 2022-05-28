@@ -261,6 +261,7 @@ public class MeFragment extends Fragment {
     }
 
     private void initView() {
+
     }
     private void showMsg(String msg) {
         Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
