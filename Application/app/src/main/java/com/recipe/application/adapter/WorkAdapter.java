@@ -49,7 +49,7 @@ public class WorkAdapter {
         return data.get(position);
     }
 
-   
+
     public long getItemId(int position) {
         return position;
     }
