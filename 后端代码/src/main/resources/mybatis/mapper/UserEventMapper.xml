@@ -8,6 +8,10 @@
         select count(like_id) from likes where like_id=#{like_id}
     </select>
 
+    <select id="whetherExistFocus_id" resultType="int">
+        select count(focus_id) from focus where focus_id=#{focus_id}
+    </select>
+
     <select id="whetherExistNameAndWho" resultType="int">
         select count(focus_id) from focus where name=#{name} and who=#{who}
     </select>
@@ -22,7 +26,7 @@
     </insert>
 
     <delete id="removeFocusMsgMapper">
-        delete from focus where name=#{name} and who=#{who}
+        delete from focus where focus_id=#{focus_id}
     </delete>
 
     <delete id="removeLikeMsgMapper">

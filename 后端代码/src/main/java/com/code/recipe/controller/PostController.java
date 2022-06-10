@@ -36,7 +36,7 @@ public class PostController {
     public Map<String,Boolean> removePostController(@RequestParam("post_id") String post_id){
         boolean result=postService.removePostService(post_id);
         Map<String,Boolean> map=new HashMap<>();
-        map.put("result",result);
+        map.put("data",result);
         return map;
     }
 

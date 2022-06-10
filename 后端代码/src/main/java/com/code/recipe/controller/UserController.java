@@ -23,22 +23,22 @@ public class UserController {
                                         @RequestParam("userPwd") String userPwd){
         boolean result=service.userLoginService(userID,userPwd);
         Map<String,Boolean> map=new HashMap<>();
-        map.put("result",result);
+        map.put("data",result);
         return map;
     }
 
     @ResponseBody
-    @RequestMapping(value="register", method = RequestMethod.GET,produces = "application/json;charset=utf-8")
-    public Map<String,Boolean> register(@RequestParam("userID") String userID,
+    @RequestMapping(value="register", method = RequestMethod.POST,produces = "application/json;charset=utf-8")
+    public Map<String,String> register(@RequestParam("userID") String userID,
                                         @RequestParam("userPwd") String userPwd){
-        boolean result=service.userRegisterService(userID,userPwd);
-        Map<String,Boolean> map=new HashMap<>();
-        map.put("result",result);
+        String result=service.userRegisterService(userID,userPwd);
+        Map<String,String> map=new HashMap<>();
+        map.put("data",result);
         return map;
     }
 
     @ResponseBody
-    @RequestMapping(value="reset", method = RequestMethod.GET,produces = "application/json;charset=utf-8")
+    @RequestMapping(value="reset", method = RequestMethod.POST,produces = "application/json;charset=utf-8")
     public Map<String,Boolean> reset(@RequestParam("userID") String userID,
                                      @RequestParam("userNewPwd") String userNewPwd){
         boolean result=service.userResetService(userID,userNewPwd);
@@ -48,22 +48,22 @@ public class UserController {
     }
 
     @ResponseBody
-    @RequestMapping(value="changeName", method = RequestMethod.GET,produces = "application/json;charset=utf-8")
+    @RequestMapping(value="changeName", method = RequestMethod.POST,produces = "application/json;charset=utf-8")
     public Map<String,Boolean> changeName(@RequestParam("user_id") String user_id,
                                      @RequestParam("newName") String newName){
         boolean result=service.changeNameService(user_id, newName);
         Map<String,Boolean> map=new HashMap<>();
-        map.put("result",result);
+        map.put("data",result);
         return map;
     }
 
     @ResponseBody
-    @RequestMapping(value="changeImage", method = RequestMethod.GET,produces = "application/json;charset=utf-8")
+    @RequestMapping(value="changeImage", method = RequestMethod.POST,produces = "application/json;charset=utf-8")
     public Map<String,Boolean> changeImage(@RequestParam("user_id") String user_id,
                                           @RequestParam("newImage") String newImage){
         boolean result=service.changeImageService(user_id, newImage);
         Map<String,Boolean> map=new HashMap<>();
-        map.put("result",result);
+        map.put("data",result);
         return map;
     }
 }

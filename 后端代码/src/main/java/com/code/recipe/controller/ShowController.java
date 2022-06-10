@@ -73,11 +73,20 @@ public class ShowController {
     }
 
     @ResponseBody
+    @RequestMapping(value="fanMessage", method = RequestMethod.GET,produces = "application/json;charset=utf-8")
+    public Map<String, List<FocusBean>> fanMsg(@RequestParam("who") String who){
+        List<FocusBean> result=service.getFanMsgService(who);
+        Map<String,List<FocusBean>> map=new HashMap<>();
+        map.put("data",result);
+        return map;
+    }
+
+    @ResponseBody
     @RequestMapping(value="focusMessage", method = RequestMethod.GET,produces = "application/json;charset=utf-8")
     public Map<String, List<FocusBean>> focusMsg(@RequestParam("who") String who){
         List<FocusBean> result=service.getFocusMsgService(who);
         Map<String,List<FocusBean>> map=new HashMap<>();
-        map.put("result",result);
+        map.put("data",result);
         return map;
     }
 

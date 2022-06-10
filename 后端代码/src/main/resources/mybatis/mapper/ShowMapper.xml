@@ -17,7 +17,7 @@
     </select>
 
     <select id="getMaterialMsgMapper" resultType="com.code.recipe.bean.MaterialBean">
-        select * from material from where post_id=#{post_id}
+        select * from material where post_id=#{post_id}
     </select>
 
     <select id="getMethodMsgMapper" resultType="com.code.recipe.bean.MethodBean">
@@ -33,7 +33,11 @@
     </select>
 
     <select id="getFocusMsgMapper" resultType="com.code.recipe.bean.FocusBean">
-        select * from focus
+        select * from focus where who=#{who}
+    </select>
+
+    <select id="getFanMsgMapper" resultType="com.code.recipe.bean.FocusBean">
+        select * from focus where name=#{who}
     </select>
 
     <select id="whetherExistLikeMessageMapper" resultType="int">
@@ -45,7 +49,7 @@
     </select>
 
     <select id="getNav_idMapper" resultType="string">
-        select nav_id from nav where nav_name=#{nav_name}
+        select nav_id from nav where dish_name=#{nav_name}
     </select>
 
     <select id="getSameNavPost" resultType="com.code.recipe.bean.PostBean">

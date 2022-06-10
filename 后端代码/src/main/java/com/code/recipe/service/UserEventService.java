@@ -13,23 +13,23 @@ public class UserEventService {
     @Autowired
     UserEventMapper mapper;
 
-    public boolean addFocusMsgService(String name,String who){
+    public String addFocusMsgService(String name,String who){
         int result= mapper.whetherExistNameAndWho(name, who);
         if(result==0){
             String focus_id= UUID.randomUUID().toString();
-            int r=mapper.addFocusMsgMapper(focus_id,name,who);
-            return r==1;
+            mapper.addFocusMsgMapper(focus_id,name,who);
+            return focus_id;
         }
         else{
-            return false;
+            return "数据库已有记录";
         }
 
     }
 
-    public boolean removeFocusMsgService(String name,String who){
-        int result= mapper.whetherExistNameAndWho(name, who);
+    public boolean removeFocusMsgService(String focus_id){
+        int result= mapper.whetherExistFocus_id(focus_id);
         if(result==1){
-            int r=mapper.removeFocusMsgMapper(name, who);
+            int r=mapper.removeFocusMsgMapper(focus_id);
             return r==1;
         }
         else{
@@ -90,7 +90,6 @@ public class UserEventService {
         else{
             return false;
         }
-
     }
 
 }

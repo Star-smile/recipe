@@ -49,6 +49,10 @@ public class ShowService {
         return mapper.getFocusMsgMapper(who);
     }
 
+    public List<FocusBean> getFanMsgService(String who){
+        return mapper.getFanMsgMapper(who);
+    }
+
     public boolean whetherExistLikeMsgService(String post_id,String name){
         int rs= mapper.whetherExistLikeMessageMapper(post_id, name);
         return rs==1;

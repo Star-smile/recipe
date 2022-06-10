@@ -18,26 +18,25 @@ public class UserEventController {
 
     @ResponseBody
     @RequestMapping(value="addFocus", method = RequestMethod.GET,produces = "application/json;charset=utf-8")
-    public Map<String,Boolean> addFocus(@RequestParam("name") String name,
+    public Map<String,String> addFocus(@RequestParam("name") String name,
                                      @RequestParam("who") String who){
-        boolean res=service.addFocusMsgService(name, who);
-        Map<String,Boolean> map=new HashMap<>();
+        String res=service.addFocusMsgService(name, who);
+        Map<String,String> map=new HashMap<>();
         map.put("data",res);
         return map;
     }
 
     @ResponseBody
     @RequestMapping(value="removeFocus", method = RequestMethod.GET,produces = "application/json;charset=utf-8")
-    public Map<String,Boolean> removeFocus(@RequestParam("name") String name,
-                                     @RequestParam("who") String who){
-        boolean res=service.removeFocusMsgService(name, who);
+    public Map<String,Boolean> removeFocus(@RequestParam("focus_id") String focus_id){
+        boolean res=service.removeFocusMsgService(focus_id);
         Map<String,Boolean> map=new HashMap<>();
         map.put("data",res);
         return map;
     }
 
     @ResponseBody
-    @RequestMapping(value="addLike", method = RequestMethod.GET,produces = "application/json;charset=utf-8")
+    @RequestMapping(value="addLike", method = RequestMethod.POST,produces = "application/json;charset=utf-8")
     public Map<String,String> addLike(@RequestParam("post_id") String post_id,
                                            @RequestParam("name") String name){
         String res=service.addLikeMsgService(post_id, name);
